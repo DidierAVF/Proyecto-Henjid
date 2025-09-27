@@ -1,0 +1,272 @@
+/************************************************************
+ * HenJid – style.css (solo Home / index.html)
+ ************************************************************/
+
+/* ========== Reset básico y variables ========== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+:root{
+  /* Paleta */
+  --bg:#f5f6f7;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --muted:#6b7280;
+  --brand:#2e7cf6;
+  --brand-2:#39b36d;
+  --line:#e5e7eb;
+  --shadow:0 8px 20px rgba(0,0,0,.08);
+  --radius:14px;
+
+  /* Tipos y tamaños */
+  --font:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;
+  --h1:clamp(2.2rem,4.5vw,3.2rem);
+  --h2:clamp(1.4rem,2.5vw,1.8rem);
+  --h3:1.1rem;
+  --lead:1rem;
+}
+
+/* Fondo general y tipografía */
+html,body{ height:100%; background:var(--bg); }
+body{
+  margin:0;
+  color:var(--text);
+  font-family:var(--font);
+  line-height:1.5;
+}
+
+/* Elementos base */
+img{ max-width:100%; display:block; }
+ul,ol{ margin:0; padding:0; }
+ul[role], ul:not([role]){ list-style:none; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; }
+
+/* Contenedores */
+body>header, body>main, body>footer{
+  max-width:1140px;
+  margin-inline:auto;
+  padding-inline:16px;
+}
+
+/* ========== Header y navegación ========== */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-block:18px;
+  gap:16px;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  border-bottom-left-radius:var(--radius);
+  border-bottom-right-radius:var(--radius);
+}
+
+/* Marca (logo + texto) */
+header>a{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size:1.25rem;
+}
+
+/* Nav */
+header nav ul{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+header nav a{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 10px;
+  border-radius:10px;
+}
+header nav a:hover{ background:#eef2ff; }
+
+/* ========== Main / Hero (1ª sección) ========== */
+/* 3 columnas: [texto izq] [texto izq] | [imagen derecha] */
+main>section:first-of-type{
+  display:grid;
+  grid-template-columns: 1fr 1fr 0.85fr;
+  grid-template-areas:
+    "title    title    image"
+    "subtitle subtitle image"
+    "cta1     cta2     image";
+  align-items:center;
+  column-gap:28px;
+  row-gap:10px;
+  padding-block:28px 18px;
+}
+
+/* Título (izquierda, ocupa 2 columnas) */
+main>section:first-of-type h1{
+  grid-area:title;
+  font-size:var(--h1);
+  line-height:1.15;
+  margin:0 0 8px 0;
+}
+
+/* Subtítulo (debajo del H1, cursiva) */
+main>section:first-of-type p{
+  grid-area:subtitle;
+  margin:0 0 8px 0;
+  color:var(--muted);
+  font-size:var(--lead);
+  font-style:italic;
+}
+
+/* Botón 1: Registrarse (debajo del subtítulo, izquierda) */
+main>section:first-of-type > a:first-of-type{
+  grid-area:cta1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 16px;
+  font-size:1.05rem;
+  border-radius:12px;
+  background:var(--brand);
+  color:#fff;
+  font-weight:700;
+  box-shadow:var(--shadow);
+}
+
+/* Botón 2: Explorar módulos (a la derecha del primero) */
+main>section:first-of-type > a:nth-of-type(2){
+  grid-area:cta2;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 16px;
+  font-size:1.05rem;
+  border-radius:12px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+
+/* Imagen fija a la derecha ocupando las 3 filas */
+main>section:first-of-type > img{
+  grid-area:image;
+  border-radius:20px;
+  justify-self:end;
+}
+
+/* ========== Features (2ª sección) ========== */
+main>section:nth-of-type(2){
+  background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+  margin-block:10px 22px;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+/* Título ocupa todo el ancho */
+main>section:nth-of-type(2)>h2{
+  grid-column:1 / -1;
+  font-size:var(--h2);
+  margin:0 0 14px 0;
+}
+main>section:nth-of-type(2) article{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:14px;
+}
+main>section:nth-of-type(2) article h3{
+  font-size:var(--h3);
+  margin:8px 0 6px 0;
+}
+main>section:nth-of-type(2) article p{
+  color:var(--muted);
+  margin:0;
+}
+
+/* ========== Creadores (3ª sección) ========== */
+main>section:nth-of-type(3){
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-block:10px 28px;
+}
+/* Título ocupa todo el ancho */
+main>section:nth-of-type(3)>h2{
+  grid-column:1 / -1;
+}
+main>section:nth-of-type(3) article{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:14px;
+}
+main>section:nth-of-type(3) blockquote{
+  margin:0 0 10px 0;
+  font-weight:700;
+}
+main>section:nth-of-type(3) article p{
+  margin:0;
+  color:var(--muted);
+}
+
+/* ========== Footer ========== */
+footer{
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  border-top-left-radius:var(--radius);
+  border-top-right-radius:var(--radius);
+  padding-block:16px 24px;
+}
+footer>p{ margin:0 0 8px 0; font-weight:600; }
+footer nav ul{ display:flex; gap:12px; }
+
+/* ========== Responsivo ========== */
+@media (max-width:960px){
+  /* Hero a una columna en orden natural */
+  main>section:first-of-type{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "title"
+      "subtitle"
+      "cta1"
+      "cta2"
+      "image";
+  }
+  main>section:first-of-type > img{
+    justify-self:center;
+    max-width:420px;
+  }
+
+  /* Features y Creadores a 2 columnas */
+  main>section:nth-of-type(2),
+  main>section:nth-of-type(3){
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media (max-width:640px){
+  header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  header nav ul{ gap:10px; flex-wrap:wrap; }
+
+  /* Features y Creadores a 1 columna */
+  main>section:nth-of-type(2),
+  main>section:nth-of-type(3){
+    grid-template-columns:1fr;
+  }
+
+  /* En móvil, botones más anchos para facilidad táctil */
+  main>section:first-of-type > a{
+    display:block;
+    width:max(220px,60%);
+    text-align:center;
+  }
+}

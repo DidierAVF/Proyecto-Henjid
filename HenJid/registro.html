@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HenJid — Crear cuenta</title>
+</head>
+<body>
+
+  <header>
+    <a href="index.html">
+      <img src="logo.png" alt="Logo HenJid" width="40" height="40">
+      <span>HenJid</span>
+    </a>
+  </header>
+
+  <main>
+    <section aria-labelledby="t-registro">
+      <h1 id="t-registro">Tu camino al inglés empieza aquí, gratis y sin restricciones</h1>
+
+      <form action="#" method="post">
+        <p>
+          <label for="reg-nombre">Nombre completo</label>
+          <input id="reg-nombre" name="nombre" type="text" autocomplete="name" required>
+        </p>
+
+        <p>
+          <label for="reg-email">Correo electrónico</label>
+          <input id="reg-email" name="email" type="email" autocomplete="email" required>
+        </p>
+
+        <p>
+          <label for="reg-usuario">Nombre de usuario</label>
+          <input id="reg-usuario" name="usuario" type="text" autocomplete="username" minlength="8" required>
+        </p>
+
+        <p>
+          <small>Debe contener al menos 8 caracteres</small>
+        </p>
+
+        <p>
+          <label for="reg-pais">País</label>
+          <select id="reg-pais" name="pais" required>
+            <option value="" selected>Seleccione su país</option>
+            <option value="CO">Colombia</option>
+            <option value="VE">Venezuela</option>
+            <option value="MX">México</option>
+            <option value="AR">Argentina</option>
+            <option value="ES">España</option>
+            <option value="CL">Chile</option>
+          </select>
+        </p>
+
+        <p>
+          <button type="submit">Crear cuenta</button>
+        </p>
+      </form>
+
+      <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© HenJid</p>
+  </footer>
+
+</body>
+</html>

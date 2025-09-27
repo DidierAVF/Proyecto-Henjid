@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HenJid — Módulos</title>
+</head>
+<body>
+
+  <!-- Encabezado y navegación principal -->
+  <header>
+    <a href="index.html">
+      <img src="logo.png" alt="Logo HenJid">
+      <span>HenJid</span>
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="modulos.html" aria-current="page">Módulos</a></li>
+        <li><a href="progreso.html">Progreso</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Disposición general: barra lateral + contenido -->
+    <section>
+
+      <!-- Barra lateral con perfil y búsqueda -->
+      <aside aria-label="Panel del usuario">
+        <a href="perfil.html">
+          <figure>
+            <img src="avatar-johander.jpg" alt="Foto de perfil de Johander" width="80" height="80">
+            <figcaption>Johander</figcaption>
+          </figure>
+        </a>
+
+        <form action="modulos.html" method="get" role="search" aria-label="Buscar módulos">
+          <label for="q">Explorar módulos…</label>
+          <input id="q" name="q" type="search" placeholder="Explorar módulos…">
+          <button type="submit">Buscar</button>
+        </form>
+      </aside>
+
+      <!-- Contenido principal de módulos -->
+      <section aria-labelledby="titulo-modulos">
+        <header>
+          <h1 id="titulo-modulos">Explora todos los módulos disponibles</h1>
+          <p>Selecciona un nivel y comienza tu aprendizaje al ritmo que quieras.</p>
+
+          <!-- Filtros por nivel/tema -->
+          <nav aria-label="Filtros de módulos">
+            <ul>
+              <li><button type="button">A1</button></li>
+              <li><button type="button">A2</button></li>
+              <li><button type="button">Gramática</button></li>
+              <li><button type="button">Vocabulario</button></li>
+              <li><button type="button">Conversación</button></li>
+              <li>
+                <label>
+                  <input type="checkbox" name="completados"> Mostrar completados
+                </label>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
+        <!-- Lista de tarjetas de módulos -->
+        <ul>
+
+          <li>
+            <article>
+              <header>
+                <strong>A1</strong>
+                <h2>Principiante</h2>
+                <p>Fundamentos básicos</p>
+                <a href="curso.html">Ingresar</a>
+              </header>
+              <footer>
+                <label for="p1">Progreso</label>
+                <progress id="p1" value="39" max="100">39%</progress>
+                <span>39%</span>
+              </footer>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <header>
+                <strong>A1</strong>
+                <h2>Vocabulario Básico</h2>
+                <p>Palabras esenciales</p>
+                <a href="modulo-vocabulario-basico.html">Ingresar</a>
+              </header>
+              <footer>
+                <label for="p2">Progreso</label>
+                <progress id="p2" value="13" max="100">13%</progress>
+                <span>13%</span>
+              </footer>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <header>
+                <strong>A1</strong>
+                <h2>Gramática Inicial</h2>
+                <p>Estructura simple</p>
+                <a href="modulo-gramatica-inicial.html">Ingresar</a>
+              </header>
+              <footer>
+                <label for="p3">Progreso</label>
+                <progress id="p3" value="52" max="100">52%</progress>
+                <span>52%</span>
+              </footer>
+            </article>
+          </li>
+
+          <li>
+            <article>
+              <header>
+                <strong>A1</strong>
+                <h2>Conversaciones S.</h2>
+                <p>Diálogos cortos</p>
+                <a href="modulo-conversaciones.html">Ingresar</a>
+              </header>
+              <footer>
