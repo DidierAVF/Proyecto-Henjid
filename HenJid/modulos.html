@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HenJid — Módulos</title>
+  <!-- Estilos de la página de módulos -->
+  <link rel="stylesheet" href="modulos.css" />
+</head>
+<body>
+
+  <!-- Header (igual al mockup) -->
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Ir al inicio">
+      <img src="images/logo2.png" alt="Logo HenJid" width="38" height="38" />
+      <span>HenJid</span>
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a aria-current="page" href="modulos.html">Módulos</a></li>
+        <li><a href="progreso.html">Progreso</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Layout principal: sidebar + contenido -->
+  <main class="layout">
+
+    <!-- Sidebar -->
+    <aside aria-label="Panel del usuario">
+      <a href="perfil.html" class="profile">
+        <figure>
+          <img src="images/perfil.png" alt="Foto de perfil" width="84" height="84" />
+          <figcaption>Johander</figcaption>
+        </figure>
+      </a>
+
+      <form role="search" class="search">
+        <input type="search" placeholder="Explorar módulos…" />
+      </form>
+    </aside>
+
+    <!-- Contenido -->
+    <section class="content">
+
+      <!-- Encabezado de sección -->
+      <header class="section-head">
+        <h1>Explora todos los módulos disponibles</h1>
+        <p>Selecciona un nivel y comienza tu aprendizaje al ritmo que quieras.</p>
+
+        <!-- Chips de filtro -->
+        <nav aria-label="Filtros de módulos" class="filters">
+          <button class="is-active" type="button">A1</button>
+          <button type="button">A2</button>
+          <button type="button">Gramática</button>
+          <button type="button">Vocabulario</button>
+          <button type="button">Conversación</button>
+
+          <label class="toggle-completed">
+            <input type="checkbox" />
+            <span>Mostrar completados</span>
+          </label>
+        </nav>
+      </header>
+
+      <!-- Lista de tarjetas de módulos -->
+      <div class="modules">
+
+        <!-- Módulo 1 -->
+        <article>
+          <div class="badge blue">A1</div>
+          <div class="info">
+            <h3>Principiante</h3>
+            <small>Fundamentos básicos</small>
+            <div class="progress" style="--value:39%"><i></i></div>
+          </div>
+          <a class="cta" href="curso.html">Ingresar</a>
+        </article>
+
+        <!-- Módulo 2 -->
+        <article>
+          <div class="badge green">A1</div>
+          <div class="info">
+            <h3>Vocabulario Básico</h3>
+            <small>Palabras esenciales</small>
+            <div class="progress" style="--value:13%"><i></i></div>
+          </div>
+          <a class="cta" href="curso.html">Ingresar</a>
+        </article>
+
+        <!-- Módulo 3 -->
+        <article>
+          <div class="badge orange">A1</div>
+          <div class="info">
+            <h3>Gramática Inicial</h3>
+            <small>Estructura simple</small>
+            <div class="progress" style="--value:52%"><i></i></div>
+          </div>
+          <a class="cta" href="curso.html">Ingresar</a>
+        </article>
+
+        <!-- Módulo 4 -->
+        <article>
+          <div class="badge red">A1</div>
+          <div class="info">
+            <h3>Conversaciones S.</h3>
+            <small>Diálogos cortos</small>
+            <div class="progress" style="--value:50%"><i></i></div>
+          </div>
+          <a class="cta" href="curso.html">Ingresar</a>
+        </article>
+
+        <!-- Módulo 5 -->
+        <article>
+          <div class="badge purple">A1</div>
+          <div class="info">
+            <h3>Vocabulario Extra</h3>
+            <small>Palabras útiles</small>
+            <div class="progress" style="--value:1%"><i></i></div>
+          </div>
+          <a class="cta" href="curso.html">Ingresar</a>
+        </article>
+
+        <!-- Módulo 6 -->
+        <article>
+          <div class="badge pink">A1</div>
+          <div class="info">
+            <h3>Expresiones Cot.</h3>
+            <small>Frases comunes</small>
+            <div class="progress" style="--value:3%"><i></i></div>
+          </div>
+          <a class="cta" href="curso.html">Ingresar</a>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>HenJid</p>
+    <nav aria-label="Redes">
+      <ul class="social">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+</body>
+</html>
