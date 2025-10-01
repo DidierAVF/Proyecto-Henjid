@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HenJid — Iniciar sesión</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+ 
+
+  <main>
+    <section aria-labelledby="t-login">
+
+      <!-- Enlace atrás dentro de la tarjeta -->
+      <a href="index.html" class="back-link">← Atrás</a>
+
+      <!-- Logo + texto centrados dentro de la tarjeta -->
+      <div class="brand" style="margin-bottom: 6px;">
+        <a href="index.html">
+          <img src="images/logo2.png" alt="Logo HenJid">
+          <span>HenJid</span>
+        </a>
+      </div>
+
+      <!-- Título -->
+      <h1 id="t-login">Iniciar sesión</h1>
+
+      <!-- Formulario -->
+      <form action="#" method="post" novalidate>
+        <p>
+          <label for="login-identificador">Correo electrónico o nombre de usuario</label>
+          <input id="login-identificador" name="identificador" type="text"
+                 autocomplete="username" placeholder="Correo electrónico o nombre de usuario" required>
+        </p>
+
+        <p>
+          <label for="login-pass">Contraseña</label>
+          <input id="login-pass" name="password" type="password"
+                 autocomplete="current-password" placeholder="Contraseña" required>
+        </p>
+
+        <p>
+          <button type="submit">Iniciar sesión</button>
+        </p>
+      </form>
+
+      <a href="recuperar.html" class="forgot-link">¿Olvidaste tu contraseña?</a>
+
+
+      <hr style="border:0;border-top:1px solid var(--line);margin:16px 0;">
+
+      <p style="text-align:center;">
+        ¿No tienes cuenta? <a href="registro.html">Regístrate gratis</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p style="text-align:center; color: var(--muted); margin-top: 12px;">© HenJid</p>
+  </footer>
+
+</body>
+</html>
