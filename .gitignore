@@ -1,0 +1,10 @@
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+/build/
+.settings/
+.project
+.classpath
+.factorypath
+.idea/
+*.iml
+*.log
