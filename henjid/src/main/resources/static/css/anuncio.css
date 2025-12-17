@@ -1,0 +1,215 @@
+/* Layout principal: dos columnas */
+.ad-layout {
+    max-width: 1100px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1.3fr;
+    gap: 24px;
+}
+
+/* ======= ACTIVIDAD ======= */
+
+.actividad {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    display: flex;
+    flex-direction: column;
+}
+
+.actividad h2 {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.actividad-subtitle {
+    color: #6b7280;
+    margin-bottom: 16px;
+}
+
+.actividad-card {
+    background: #f8fafc;
+    border-radius: 14px;
+    padding: 18px;
+    flex: 1;
+}
+
+.actividad-pregunta {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.actividad-opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.actividad-opciones button {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.95rem;
+    transition: background .15s, border-color .15s, transform .1s;
+}
+
+.actividad-opciones button:hover {
+    background: #e5efff;
+    border-color: #3b82f6;
+    transform: translateY(-1px);
+}
+
+.actividad-opciones button.correct {
+    background: #dcfce7;
+    border-color: #22c55e;
+}
+
+.actividad-opciones button.incorrect {
+    background: #fee2e2;
+    border-color: #ef4444;
+}
+
+.actividad-feedback {
+    min-height: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ======= ANUNCIO ======= */
+
+.anuncio-panel {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    display: flex;
+    flex-direction: column;
+}
+
+.anuncio-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.anuncio-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.anuncio-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ad-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background: #e5e7eb;
+    color: #111827;
+    font-weight: 500;
+    transition: background .15s, transform .1s;
+}
+
+.ad-btn.small {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+}
+
+.ad-btn.primary {
+    background: #328DFE;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 18px;
+}
+
+.ad-btn.primary:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+.ad-btn:hover:not(:disabled) {
+    background: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.ad-btn.primary:hover:not(:disabled) {
+    background: #1d64d1;
+}
+
+.ad-timer {
+    font-size: 0.85rem;
+    color: #4b5563;
+    min-width: 48px;
+    text-align: center;
+}
+
+.ad-close {
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    cursor: default;
+    color: #9ca3af;
+    padding: 4px 6px;
+    border-radius: 999px;
+    transition: background .15s, color .15s;
+}
+
+.ad-close.enabled {
+    cursor: pointer;
+    color: #111827;
+}
+
+.ad-close.enabled:hover {
+    background: #e5e7eb;
+}
+
+.anuncio-video-wrapper {
+    background: #000;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.anuncio-video-wrapper video {
+    width: 100%;
+    display: block;
+}
+
+.anuncio-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ad-note {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .ad-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.header-disabled {
+    pointer-events: none;   /* Bloquea todos los clics */
+    opacity: 0.6;           /* Se ve desactivado */
+}

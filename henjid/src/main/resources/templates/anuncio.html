@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuncio — HenJid</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modulos.css">
+    <link rel="stylesheet" href="/css/anuncio.css">
+</head>
+<body th:with="modId=${moduloId}">
+<header class="header-disabled">
+    <a href="/">
+        <img src="/images/logo2.png" alt="Logo HenJid">
+        <span>HenJid</span>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/modulos">Módulos</a></li>
+            <li><a href="/progreso">Progreso</a></li>
+
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             alt="Avatar"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}">
+                        </span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<main class="ad-layout"
+      th:attr="data-modulo-id=${moduloId}">
+    <!-- COLUMNA IZQUIERDA: ACTIVIDAD -->
+    <section class="actividad">
+        <h2>Actividad interactiva</h2>
+        <p class="actividad-subtitle">
+            Practica vocabulario mientras termina el anuncio.
+        </p>
+
+        <div id="actividadCard" class="actividad-card">
+            <p id="actividadPregunta" class="actividad-pregunta">
+                <!-- se rellena con JS -->
+            </p>
+            <div id="actividadOpciones" class="actividad-opciones">
+                <!-- opciones con JS -->
+            </div>
+            <p id="actividadFeedback" class="actividad-feedback"></p>
+        </div>
+    </section>
+
+    <!-- COLUMNA DERECHA: ANUNCIO EN VIDEO -->
+    <section class="anuncio-panel">
+        <div class="anuncio-top">
+            <span class="anuncio-label">Anuncio</span>
+
+            <div class="anuncio-controls">
+                <button id="btnMute" class="ad-btn small">Activar sonido</button>
+                <span id="adTimer" class="ad-timer">30s</span>
+                <button id="btnCerrar" class="ad-close" disabled>✕</button>
+            </div>
+        </div>
+
+        <div class="anuncio-video-wrapper">
+            <video id="adVideo"
+                   autoplay
+                   muted
+                   playsinline>
+                <source th:src="@{'/videos/' + ${videoFile}}" type="video/mp4">
+                Tu navegador no soporta video HTML5.
+            </video>
+        </div>
+
+        <div class="anuncio-bottom">
+            <button id="btnContinuar" class="ad-btn primary" disabled>
+                Continuar Curso
+            </button>
+            <p class="ad-note">
+                La opción para continuar aparecerá cuando termine el anuncio.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>HenJid © 2025</p>
+</footer>
+
+<script src="/js/main.js"></script>
+<script src="/js/anuncio.js"></script>
+
+<!-- Toast logout (por si el usuario abre el menú) -->
+<div id="toastLogout" class="toast-logout">
+    <div class="toast-content">
+        <img src="/images/puerta.png" class="toast-icon" alt="">
+        <span>Cierre de sesión exitoso</span>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+/* ============================
+   CONTENEDOR PRINCIPAL
+=============================== */
+.config-container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.config-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    color: #111827;
+}
+
+/* ============================
+   FOTO / AVATAR
+=============================== */
+.config-foto {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ← CENTRADO REAL */
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+/* Foto subida */
+.foto-preview {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #e5e7eb;
+}
+
+/* Avatar (si no hay foto) */
+.foto-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #e8f0ff;
+    color: #1d4ed8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+/* Botón subir foto */
+.btn-subir {
+    background: #2E7CF6;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: 0.2s;
+}
+
+.btn-subir:hover {
+    background: #1e4fcc;
+}
+
+.btn-subir input {
+    display: none;
+}
+
+/* ============================
+   CAMPOS DEL FORMULARIO
+=============================== */
+.config-input {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.config-input label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1f2937;
+}
+
+.config-input input,
+.config-input select {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+}
+
+.config-input input:focus,
+.config-input select:focus {
+    border-color: #2E7CF6;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* ============================
+   BOTÓN GUARDAR
+=============================== */
+.btn-guardar {
+    width: 100%;
+    padding: 12px;
+    background: #2E7CF6;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 10px;
+}
+
+.btn-guardar:hover {
+    background: #1e4fcc;
+}

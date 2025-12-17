@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${leccion.titulo} + ' — HenJid'">Lección — HenJid</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modulos.css">
+    <link rel="stylesheet" href="/css/leccion.css">
+</head>
+<body>
+
+<!-- ======================= HEADER ======================= -->
+<header>
+    <a href="/">
+        <img src="/images/logo2.png" alt="Logo HenJid">
+        <span>HenJid</span>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/modulos">Módulos</a></li>
+            <li><a href="/progreso">Progreso</a></li>
+
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             alt="Avatar"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}">
+                        </span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon" alt="">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ======================= CONTENIDO ======================= -->
+<main class="curso-main">
+    <section class="curso-wrapper">
+
+        <!-- ====== TITULO Y SUBTITULO ====== -->
+        <div class="leccion-header">
+            <h1 class="leccion-titulo" th:text="${leccion.titulo}">Título de la lección</h1>
+
+            <p class="leccion-descripcion"
+               th:if="${leccion.descripcion != null}"
+               th:text="${leccion.descripcion}">
+                Descripción de la lección
+            </p>
+        </div>
+
+        <!-- ====== PANEL GRANDE DE LECCIÓN ====== -->
+        <section class="leccion-contenedor">
+            <div class="leccion-panel">
+
+                <div class="leccion-panel-content">
+
+                    <!-- IMAGEN -->
+                    <div class="leccion-imagen" th:if="${leccion.imagenUrl != null}">
+                        <img th:src="${leccion.imagenUrl}" alt="Ilustración de la lección">
+                    </div>
+
+                    <!-- CONTENIDO -->
+                    <article class="leccion-body" th:utext="${leccion.contenido}">
+                    </article>
+                </div>
+
+                <!-- ====== BOTONES ====== -->
+                <div class="leccion-panel-buttons">
+
+    <!-- BOTÓN ATRÁS -->
+    <a th:if="${anteriorId != null}"
+       th:href="@{'/leccion/' + ${anteriorId}}"
+       class="btn-leccion-back">Atrás</a>
+
+    <a th:if="${anteriorId == null}"
+       th:href="@{'/curso/' + ${moduloId}}"
+       class="btn-leccion-back">Atrás</a>
+
+    <!-- BOTÓN VOLVER AL MÓDULO (CENTRAL) -->
+    <a th:href="@{'/curso/' + ${moduloId}}"
+       class="btn-leccion-middle">
+        Volver al módulo
+    </a>
+
+    <!-- BOTÓN SIGUIENTE -->
+    <a th:if="${siguienteId != null}"
+       th:href="@{'/leccion/' + ${leccion.id} + '/completar'}"
+       class="btn-leccion-next">
+        Siguiente
+    </a>
+
+    <!-- ÚLTIMA LECCIÓN -->
+    <a th:if="${siguienteId == null}"
+       th:href="@{'/leccion/' + ${leccion.id} + '/completar'}"
+       class="btn-leccion-next">
+        Terminar
+    </a>
+
+</div>
+
+
+            </div>
+        </section>
+
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>HenJid © 2025</p>
+</footer>
+
+<script src="/js/main.js"></script>
+
+
+
+
+<!-- Toast logout (NECESARIO PARA QUE FUNCIONE) -->
+<div id="toastLogout" class="toast-logout">
+    <div class="toast-content">
+        <img src="/images/puerta.png" class="toast-icon" alt="">
+        <span>Cierre de sesión exitoso</span>
+    </div>
+</div>
+
+
+
+</body>
+</html>

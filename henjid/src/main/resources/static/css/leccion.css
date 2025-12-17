@@ -1,0 +1,128 @@
+/* ================================
+   ESTILOS EXCLUSIVOS PARA LECCIÓN
+================================ */
+
+/* CONTENEDOR DEL HEADER DE TÍTULO */
+.leccion-header {
+    width: 100%;
+    max-width: 850px;
+    margin: -1rem auto 1rem auto; /* espacio superior más grande */
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TÍTULO */
+.leccion-titulo {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: -1rem;
+}
+
+/* DESCRIPCIÓN */
+.leccion-descripcion {
+    font-size: 1.1rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+    font-style: italic;   /* texto en cursiva */
+}
+
+/* QUITAR ESPACIO EXTRA ENTRE TÍTULO Y PANEL */
+.leccion-contenedor {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* PANEL GRANDE */
+.leccion-panel {
+    width: 100%;
+    max-width: 1100px;
+    margin: 1rem auto 4rem auto; /* ahora sí mantenemos el control */
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 3rem 3rem;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* CONTENIDO INTERNO */
+.leccion-panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* IMAGEN (AJUSTE DE TAMAÑO) */
+.leccion-imagen img {
+    max-width: 420px;   /* límite elegante */
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;     /* centrada */
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* TEXTO */
+.leccion-body {
+    font-size: 1.25rem;
+    line-height: 1.9;
+    color: #1f2937;
+}
+
+/* BOTONES */
+.leccion-panel-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.btn-leccion-back,
+.btn-leccion-next,
+.btn-leccion-back {
+    padding: 0.8rem 2rem;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+/* BOTÓN SIGUIENTE */
+.btn-leccion-next {
+    background: #2e7cf6;
+    border: none;
+    color: white;
+}
+
+.btn-leccion-next:hover {
+    background: #1d6be0; /* un poco más oscuro */
+    transform: translateY(-2px);
+}
+
+/* BOTÓN VOLVER */
+.btn-leccion-back {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+}
+
+.btn-leccion-back:hover {
+    background: #f3f4f6;   /* gris suave */
+    border-color: #d1d5db; /* más oscuro */
+    transform: translateY(-2px);
+}
+
+
+.btn-leccion-middle {
+    background: #e9eef7;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #2d3e6f;
+    text-decoration: none;
+    border: 1px solid #cfd9e6;
+    transition: 0.2s;
+}
+
+.btn-leccion-middle:hover {
+    background: #d8e3f7;
+}

@@ -1,0 +1,238 @@
+/************************************************************
+ * HenJid – modulos.css (solo estilos de la página Módulos)
+ ************************************************************/
+
+/* ========== Reset y VARIABLES EXCLUSIVAS DE ESTA PÁGINA ========== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+:root{
+  /* Paleta */
+  --bg: #f5f6f7;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --brand: #2e7cf6;
+  --line: #e5e7eb;
+  --shadow: 0 8px 20px rgba(0,0,0,.08);
+  --radius: 14px;
+
+  /* Tipografía (IMPORTANTE para que no use la gigante del style.css) */
+  --font: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+
+  /* Tamaños NORMALES usados en módulos */
+  --h1: clamp(1.8rem, 3vw, 2.2rem);
+  --h2: 1.2rem;
+}
+
+html, body{ 
+  height:100%; 
+  background:var(--bg); 
+}
+
+body{
+  margin:0;
+  color:var(--text);
+  font-family:var(--font);
+  line-height:1.5;
+}
+
+/* Contenedor principal */
+body > header,
+body > main,
+body > footer{
+  max-width:1140px;
+  margin-inline:auto;
+  padding-inline:16px;
+}
+
+/* ========== NAV ACTIVO (Módulos) ========== */
+.menu a[aria-current="page"] {
+    color: var(--brand);
+    font-weight: 600;
+    position: relative;
+}
+
+.menu a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 3px;
+    background: var(--brand);
+    border-radius: 2px;
+}
+
+/* Avatar */
+.avatar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:#e5f0ff;
+  overflow:hidden;
+  font-weight:600;
+  font-size:0.9rem;
+  color:#1d4ed8;
+}
+.avatar-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:inherit;
+}
+
+/* ========== SECCIÓN DE MÓDULOS ========== */
+
+.modules-section{
+  background:transparent;
+  box-shadow:none;
+  padding:0;
+  margin-block:18px 26px;
+}
+
+/* -------- BURBUJA CON COLITA -------- */
+.modules-header {
+  position: relative;
+  display: inline-block;
+  padding: 18px 24px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  margin-bottom: 32px; /* espacio antes de las tarjetas */
+}
+
+/* Colita con borde suave */
+.modules-header::after {
+    content: "";
+    position: absolute;
+    left: 36px;         /* alineación perfecta */
+    bottom: -14px;      /* pegadita al borde */
+    width: 26px;
+    height: 26px;
+    background: var(--surface);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+/* Título */
+.modules-header h1{
+  margin:0 0 4px 0;
+  font-size:var(--h1);
+}
+
+/* Subtítulo */
+.modules-header p{
+  margin:0;
+  color:var(--muted);
+}
+
+/* -------- LISTA DE MÓDULOS -------- */
+.modules{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+/* Tarjeta */
+.modules article{
+  display:grid;
+  grid-template-columns:auto minmax(200px, 1fr) auto;
+  gap:14px;
+  align-items:center;
+
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px 18px;
+  box-shadow:var(--shadow);
+}
+
+
+/* Badge de nivel */
+.badge{
+  width:64px;
+  height:64px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-weight:800;
+  border-radius:12px;
+}
+
+/* Título del curso */
+.modules .info h3{
+  font-size:var(--h2);
+  margin:0 0 4px 0;
+}
+
+/* Descripción */
+.modules .info p{
+  margin:0;
+  color:var(--muted);
+}
+
+/* Botón */
+.cta{
+  background:var(--brand);
+  color:#fff;
+  font-weight:700;
+  border:none;
+  border-radius:12px;
+  padding:10px 16px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.cta:hover{
+  filter:brightness(.95);
+}
+
+/* Cuando no hay módulos */
+.modules-empty{
+  margin-top:12px;
+  color:var(--muted);
+}
+
+/* -------- RESPONSIVE -------- */
+@media (max-width:640px){
+
+  .modules-header{
+    max-width:100%;
+  }
+
+  .modules-header::after{
+    left:40px;
+  }
+
+  .modules article{
+    grid-template-columns:64px 1fr;
+    grid-template-areas:
+      "badge info"
+      "cta   cta";
+    row-gap:8px;
+  }
+
+  .badge{ grid-area:badge; }
+  .info{ grid-area:info; }
+  .cta{
+    grid-area:cta;
+    justify-self:stretch;
+    text-align:center;
+  }
+}
+
+.modulo-bloqueado {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.modulo-bloqueado .cta {
+    background: #cbd5e1 !important;
+    cursor: not-allowed !important;
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil — HenJid</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- CSS exclusivo del perfil -->
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+
+<header>
+    <a href="/">
+      <img src="images/logo2.png" alt="Logo HenJid">
+      <span>HenJid</span>
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <ul class="menu">
+
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/modulos">Módulos</a></li>
+        <li><a href="/progreso">Progreso</a></li>
+
+        <!-- Si NO está logueado -->
+        <li th:if="${session.username == null}">
+            <a href="/login">Perfil</a>
+        </li>
+
+        <!-- Si SÍ está logueado -->
+       <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <!-- Si SÍ hay sesión -->
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <!-- Avatar: foto si hay, inicial si no -->
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             alt="Avatar"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}">
+                            U
+                        </span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon" alt="Salir">
+                    </a>
+                </div>
+            </li>
+      </ul>
+    </nav>
+</header>
+
+
+<main>
+
+    <div class="perfil-container">
+
+        <!-- Foto del perfil -->
+        <div class="perfil-header">
+
+            <!-- FOTO SI EXISTE -->
+            <img th:if="${foto != null}"
+                 th:src="@{'/uploads/' + ${foto}}"
+                 class="perfil-foto"
+                 alt="Foto de perfil">
+
+            <!-- AVATAR SI NO HAY FOTO -->
+            <div th:if="${foto == null}"
+                 class="perfil-avatar"
+                 th:text="${#strings.substring(username,0,1).toUpperCase()}">
+                U
+            </div>
+        </div>
+
+        <!-- Datos principales -->
+        <div class="perfil-info">
+            <h2 th:text="${nombre}">Nombre usuario</h2>
+
+            <p class="perfil-username">
+                @<span th:text="${username}">username</span>
+            </p>
+
+            <p class="perfil-pais" th:if="${pais != null}">
+                <strong>País:</strong>
+                <span th:text="${pais}"></span>
+            </p>
+        </div>
+
+        <!-- Datos extra -->
+        <div class="perfil-data">
+            <p><strong>Correo:</strong> <span th:text="${correo}"></span></p>
+        </div>
+
+        <!-- Botones -->
+        <div class="perfil-actions">
+            <a href="/configuracion" class="btn-accion">Editar perfil</a>
+
+            <a href="/logout" id="logoutPerfilBtn" class="btn-logout">Cerrar sesión</a>
+        </div>
+
+    </div>
+
+</main>
+
+<script src="/js/main.js"></script>
+
+<!-- Toast de logout -->
+<div id="toastLogout" class="toast-logout">
+  <div class="toast-content">
+    <img src="/images/puerta.png" class="toast-icon">
+    <span>Cierre de sesión exitoso</span>
+  </div>
+</div>
+
+</body>
+</html>

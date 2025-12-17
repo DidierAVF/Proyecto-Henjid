@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Quiz — ' + ${modulo.nombre}">Quiz</title>
+
+    <!-- Estilos globales -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modulos.css">
+    <link rel="stylesheet" href="/css/curso.css">
+
+    <!-- Estilo del quiz -->
+    <link rel="stylesheet" href="/css/quiz.css">
+</head>
+
+<body>
+
+<!-- =============================== -->
+<!-- HEADER -->
+<!-- =============================== -->
+<header>
+    <a href="/">
+        <img src="/images/logo2.png" alt="Logo HenJid">
+        <span>HenJid</span>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/modulos">Módulos</a></li>
+            <li><a href="/progreso">Progreso</a></li>
+
+            <!-- No hay sesión -->
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <!-- Sí hay sesión -->
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             alt="Avatar"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}">
+                        </span>
+                    </div>
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon" alt="">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<!-- =============================== -->
+<!-- CONTENIDO DEL QUIZ -->
+<!-- =============================== -->
+<main class="quiz-container">
+
+    <!-- BOTÓN ATRÁS -->
+    <a th:href="@{'/curso/' + ${modulo.id}}" class="btn-atras">
+        Volver al curso
+    </a>
+
+    <h1 th:text="'Quiz Final — ' + ${modulo.nombre}">Quiz Final</h1>
+    <p>Responde las 10 preguntas. Necesitas al menos 6 correctas para aprobar.</p>
+
+    <form id="quizForm">
+
+        <div id="notaFinal" class="nota-final" style="display:none;">
+            <h2 id="notaTexto"></h2>
+        </div>
+
+        <div id="preguntasContainer"></div>
+
+        <button id="enviarQuiz" type="button">Enviar Quiz</button>
+    </form>
+
+</main>
+
+
+<!-- =============================== -->
+<!-- MODAL DE RESULTADO -->
+<!-- =============================== -->
+<div id="resultadoModal" class="resultado-modal">
+    <div class="modal-content">
+        <h2 id="resultadoTitulo"></h2>
+        <p id="resultadoNota"></p>
+
+        <div class="modal-buttons">
+            <button id="btnRevisar">Revisar respuestas</button>
+            <button id="btnReintentar" style="display:none;">Reintentar</button>
+            <button id="btnTerminar" style="display:none;">Terminar</button>
+            <button id="btnVolver" style="display:none;">Volver</button>
+        </div>
+    </div>
+</div>
+
+<!-- =============================== -->
+<!-- Scripts -->
+<!-- =============================== -->
+<script src="/js/main.js"></script>
+<script src="/js/quiz.js"></script>
+
+
+<div id="quizToast" class="quiz-toast">
+    <span id="quizToastText"></span>
+</div>
+
+
+<div id="toastLogout" class="toast-logout">
+    <div class="toast-content">
+        <img src="/images/puerta.png" class="toast-icon" alt="">
+        <span>Cierre de sesión exitoso</span>
+    </div>
+</div>
+
+
+</body>
+</html>

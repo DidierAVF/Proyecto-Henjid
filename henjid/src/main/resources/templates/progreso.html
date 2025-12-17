@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progreso — HenJid</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modulos.css">
+    <link rel="stylesheet" href="/css/curso.css">
+    <link rel="stylesheet" href="/css/progreso.css"> <!-- NUEVO -->
+</head>
+
+<body>
+
+<!-- =============================== -->
+<!-- HEADER -->
+<!-- =============================== -->
+<header>
+    <a href="/">
+        <img src="/images/logo2.png" alt="Logo HenJid">
+        <span>HenJid</span>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/modulos">Módulos</a></li>
+            <li><a href="/progreso" aria-current="page">Progreso</a></li>
+
+            <!-- Si NO hay sesión -->
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <!-- Si SÍ hay sesión -->
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             alt="Avatar"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}">
+                        </span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon" alt="Salir">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+
+<!-- =============================== -->
+<!-- CONTENIDO PRINCIPAL -->
+<!-- =============================== -->
+<main class="progreso-container">
+
+    <!-- =============================== -->
+    <!-- PROGRESO GLOBAL -->
+    <!-- =============================== -->
+    <section class="progreso-global">
+        <h2>Progreso General</h2>
+
+        <p>
+            <strong th:text="${progresoGlobal} + '%'">0%</strong> completado
+        </p>
+
+        <div class="barra">
+            <div class="barra-fill"
+                th:style="'width:' + ${progresoGlobal} + '%'">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =============================== -->
+    <!-- PROGRESO POR MÓDULO -->
+    <!-- =============================== -->
+    <section>
+        <h2 style="margin-bottom: 15px;">Progreso por Módulo</h2>
+
+        <div th:each="p : ${progresos}" class="modulo-card">
+
+            <div class="modulo-header">
+                <h3 th:text="${p.modulo.nombre}">Nombre del módulo</h3>
+
+                <span class="estado"
+                      th:classappend="${p.completado} ? ' completado' : ' progreso'"
+                      th:text="${p.completado ? 'Completado' : 'En progreso'}">
+                </span>
+            </div>
+
+            <p>
+                Lecciones completadas:
+                <strong th:text="${p.leccionesCompletadas}"></strong>/6
+            </p>
+
+            <p>
+    Quiz completado:
+    <strong th:text="${p.quizzesCompletados > 0 or p.completado ? 'Sí' : 'No'}"></strong>
+</p>
+
+            <div class="barra">
+                <div class="barra-fill"
+                     th:style="'width:' + ${p.porcentajeAvance} + '%'">
+                </div>
+            </div>
+
+            <p style="margin-top: 6px;">
+                Avance:
+                <strong th:text="${p.porcentajeAvance} + '%'"></strong>
+            </p>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>HenJid © 2025</p>
+</footer>
+
+<script src="/js/main.js"></script>
+
+<!-- Toast logout (NECESARIO PARA QUE FUNCIONE) -->
+<div id="toastLogout" class="toast-logout">
+    <div class="toast-content">
+        <img src="/images/puerta.png" class="toast-icon" alt="">
+        <span>Cierre de sesión exitoso</span>
+    </div>
+</div>
+
+
+
+</body>
+</html>

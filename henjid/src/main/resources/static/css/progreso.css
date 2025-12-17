@@ -1,0 +1,100 @@
+/************************************************************
+ * HenJid – progreso.css (Estilos de la página Progreso)
+ ************************************************************/
+
+/* ====================== CONTENEDOR PRINCIPAL ====================== */
+
+.progreso-container {
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* ====================== PROGRESO GLOBAL ====================== */
+
+.progreso-global {
+    background: var(--surface);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.progreso-global h2 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.barra {
+    width: 100%;
+    height: 14px;
+    background: var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.barra-fill {
+    height: 100%;
+    background: var(--brand);
+    width: 0%;
+    transition: width .8s ease;
+}
+
+/* ====================== TARJETAS DE MÓDULOS ====================== */
+
+.modulo-card {
+    background: var(--surface);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+}
+
+.modulo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modulo-header h3 {
+    font-size: 1.3rem;
+}
+
+.estado {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.estado.completado {
+    color: #2ecc71;
+}
+
+.estado.progreso {
+    color: #f39c12;
+}
+
+.modulo-card p {
+    margin-top: 6px;
+}
+
+/* Barra dentro de cada módulo */
+.modulo-card .barra {
+    margin-top: 10px;
+}
+
+/* ====================== RESPONSIVE ====================== */
+
+@media (max-width: 600px) {
+
+    .modulo-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .progreso-global h2 {
+        font-size: 1.4rem;
+    }
+}

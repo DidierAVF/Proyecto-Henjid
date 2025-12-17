@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HenJid — Iniciar sesión</title>
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+
+  <main>
+    <section aria-labelledby="t-login">
+
+      <!-- LOGO -->
+      <div class="brand">
+        <a href="/">
+          <img src="/images/logo2.png" alt="Logo HenJid">
+          <span>HenJid</span>
+        </a>
+      </div>
+
+      <!-- BOTÓN ATRÁS -->
+      <a href="/" class="back-link">← Atrás</a>
+
+      <!-- TÍTULO -->
+      <h1 id="t-login">Iniciar sesión</h1>
+
+      <!-- MENSAJE DE ERROR DEL BACKEND -->
+      <p th:if="${error}" style="color:red; font-weight:bold; margin-bottom: 15px; text-align:center;">
+        <span th:text="${error}"></span>
+      </p>
+
+      <!-- FORMULARIO -->
+      <form action="/login" method="post">
+
+        <!-- IDENTIFICADOR (correo o usuario) -->
+        <p>
+          <label for="login-identificador">Correo electrónico o nombre de usuario</label>
+          <input id="login-identificador"
+                 name="identificador"
+                 type="text"
+                 required
+                 placeholder="Correo electrónico o nombre de usuario">
+        </p>
+
+        <!-- PASSWORD -->
+        <p>
+          <label for="login-pass">Contraseña</label>
+          <input id="login-pass"
+                 name="password"
+                 type="password"
+                 required
+                 minlength="8"
+                 placeholder="Contraseña">
+        </p>
+
+        <!-- BOTÓN -->
+        <p>
+          <button type="submit">Iniciar sesión</button>
+        </p>
+
+      </form>
+
+      <!-- OLVIDÉ MI CONTRASEÑA -->
+      <a href="/recuperar" class="forgot-link">¿Olvidaste tu contraseña?</a>
+
+      <hr style="border:0;border-top:1px solid var(--line);margin:16px 0;">
+
+      <!-- IR A REGISTRO -->
+      <p style="text-align:center;">
+        ¿No tienes cuenta? <a href="/registro">Regístrate gratis</a>
+      </p>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© HenJid</p>
+  </footer>
+
+</body>
+</html>

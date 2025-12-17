@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración — HenJid</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/configuracion.css">
+</head>
+
+<body>
+<header>
+    <a href="/">
+      <img src="images/logo2.png" alt="Logo HenJid">
+      <span>HenJid</span>
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <ul class="menu">
+
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/modulos">Módulos</a></li>
+        <li><a href="/progreso">Progreso</a></li>
+
+        <!-- Si NO está logueado -->
+        <li th:if="${session.username == null}">
+            <a href="/login">Perfil</a>
+        </li>
+
+        <!-- Si SÍ está logueado -->
+        <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <!-- Si SÍ hay sesión -->
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <!-- Avatar: foto si hay, inicial si no -->
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             alt="Avatar"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}">
+                            U
+                        </span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon" alt="Salir">
+                    </a>
+                </div>
+            </li>
+
+      </ul>
+    </nav>
+</header>
+
+
+
+<main class="config-container">
+
+    <h2>Configuración de perfil</h2>
+
+    <form action="/configuracion" method="post" enctype="multipart/form-data" class="config-form">
+
+        <!-- Imagen -->
+        <div class="config-foto">
+
+            <!-- FOTO ACTUAL -->
+            <img id="previewFoto"
+                 th:if="${foto != null}"
+                 th:src="@{'/uploads/' + ${foto}}"
+                 class="foto-preview">
+
+            <!-- AVATAR -->
+            <div id="previewAvatar"
+                 th:if="${foto == null}"
+                 class="foto-avatar"
+                 th:text="${#strings.substring(username,0,1).toUpperCase()}">U</div>
+
+            <!-- INPUT SUBIR FOTO -->
+            <label class="btn-subir">
+                Cambiar foto
+                <input type="file" id="inputFoto" name="foto" accept="image/*">
+            </label>
+
+        </div>
+
+
+        <!-- Nombre -->
+        <div class="config-input">
+            <label>Nombre completo</label>
+            <input type="text" name="nombre" th:value="${nombre}" required>
+        </div>
+
+        <!-- País -->
+        <div class="config-input">
+            <label>País</label>
+
+            <select name="pais">
+                <option th:value="${codigoPais}" th:text="${pais}" selected></option>
+                <option value="VE">Venezuela</option>
+                <option value="CO">Colombia</option>
+                <option value="MX">México</option>
+                <option value="AR">Argentina</option>
+                <option value="CL">Chile</option>
+                <option value="PE">Perú</option>
+                <option value="EC">Ecuador</option>
+                <option value="US">Estados Unidos</option>
+                <option value="ES">España</option>
+            </select>
+        </div>
+
+        <!-- Botón -->
+        <button type="submit" class="btn-guardar">Guardar cambios</button>
+
+    </form>
+
+</main>
+
+<script src="/js/main.js"></script>
+
+<!-- Toast -->
+<div id="toastLogout" class="toast-logout">
+    <div class="toast-content">
+        <img src="/images/puerta.png" class="toast-icon">
+        <span>Cierre de sesión exitoso</span>
+    </div>
+</div>
+
+</body>
+</html>

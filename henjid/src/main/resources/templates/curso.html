@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${modulo.nombre} + ' — HenJid'">Curso</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modulos.css">
+    <link rel="stylesheet" href="/css/curso.css">
+</head>
+
+<body>
+
+<header>
+    <a href="/">
+        <img src="/images/logo2.png" alt="Logo HenJid">
+        <span>HenJid</span>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/modulos">Módulos</a></li>
+            <li><a href="/progreso">Progreso</a></li>
+
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}"></span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<main class="curso-container">
+
+    <a href="/modulos" class="btn-atras-curso">Volver a Módulos</a>
+
+    <div class="curso-panel">
+
+        <!-- ========================================================= -->
+        <!--        ENCABEZADO: INFO - HISTORIAL - ACTIVIDADES         -->
+        <!-- ========================================================= -->
+        <section class="curso-header">
+
+            <!-- INFO DEL MÓDULO -->
+            <div class="curso-info">
+                <span class="nivel-tag" th:text="${modulo.nivel}">A1</span>
+                <h1 th:text="${modulo.nombre}">A1 - Principiante</h1>
+                <p th:text="${modulo.descripcion}">Fundamentos básicos del inglés</p>
+            </div>
+
+            <!-- HISTORIAL -->
+            <div class="curso-historial">
+                <h3>Historial</h3>
+
+                <p>
+                    Última actividad:
+                    <span th:text="${ultimaActividadUsuario != null
+                        ? #temporals.format(ultimaActividadUsuario, 'dd/MM/yyyy hh:mm a')
+                        : '--'}">
+                    </span>
+                </p>
+
+                <p>
+                    Calificación del quiz:
+                    <span th:text="${historial != null && historial.notaQuiz != null 
+                        ? historial.notaQuiz + '/10' 
+                        : '--'}">
+                    </span>
+                </p>
+            </div>
+
+            <!-- ACTIVIDADES INTERACTIVAS -->
+            <div class="curso-actividades">
+                <h3>Actividades Interactivas</h3>
+
+                <div class="actividades-grid">
+
+                    <!-- Juego 1 -->
+                    <div class="actividad-card">
+                        <img src="/images/juego1.png" alt="Juego 1">
+                        <h4>Crucigrama</h4>
+                       <a th:href="@{'/crucigrama?moduloId=' + ${modulo.id}}"
+   class="btn-jugar">
+    Jugar
+</a>
+                    </div>
+
+                    <!-- Juego 2 -->
+                    <div class="actividad-card">
+                        <img src="/images/juego2.png" alt="Juego 2">
+                        <h4>Arrastra y Suelta</h4>
+                        <a th:href="@{'/dragdrop?moduloId=' + ${modulo.id}}"
+
+   class="btn-jugar">
+    Jugar
+</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================= -->
+        <!--                         LECCIONES                         -->
+        <!-- ========================================================= -->
+        <section class="lecciones-section">
+            <h2>Lecciones</h2>
+
+            <div class="lecciones-grid">
+
+                <div th:each="i : ${#numbers.sequence(0,5)}">
+
+                    <!-- Lección existente -->
+                    <div class="leccion-card"
+                         th:if="${i < lecciones.size()}"
+                         th:with="lec=${lecciones[i]}">
+
+                        <div class="leccion-icon">
+                            <img th:src="@{'/images/' + ${lec.icono}}">
+                        </div>
+
+                        <h3 th:text="${lec.titulo}">Título</h3>
+
+                        <!-- DESBLOQUEADO -->
+                        <a class="btn-ingresar"
+                           th:if="${
+                               lec.orden == 1
+                               or estadoLeccion[lec.id] == true
+                               or (i > 0 and estadoLeccion[lecciones[i-1].id] == true)
+                           }"
+                           th:href="@{'/leccion/' + ${lec.id}}">
+                            Ingresar
+                        </a>
+
+                        <!-- BLOQUEADO -->
+                        <a class="btn-bloqueado"
+                           th:if="${
+                               lec.orden != 1
+                               and estadoLeccion[lec.id] == false
+                               and (i == 0 or estadoLeccion[lecciones[i-1].id] == false)
+                           }">
+                            Bloqueada
+                        </a>
+
+                    </div>
+
+                    <!-- Casilla vacía -->
+                    <div class="leccion-card placeholder"
+                         th:if="${i >= lecciones.size()}">
+                        <span>—</span>
+                    </div>
+
+                </div>
+
+                <!-- QUIZ FINAL -->
+                <div class="leccion-card quiz-card">
+                    <h3>Quiz Final</h3>
+
+                    <a class="btn-ingresar"
+                       th:if="${completadas == 6}"
+                       th:href="@{'/quiz/' + ${modulo.id}}">
+                        Ingresar
+                    </a>
+
+                    <a class="btn-bloqueado"
+                       th:if="${completadas != 6}">
+                        Bloqueado
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+    </div>
+</main>
+
+<footer>
+    <p>HenJid © 2025</p>
+</footer>
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

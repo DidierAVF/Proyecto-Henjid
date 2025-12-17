@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crucigrama — HenJid</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modulos.css">
+      <link rel="stylesheet" href="/css/leccion.css">
+
+
+    <style>
+    body {
+    background: #f5f6f7;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0; /* 🔥 EVITA QUE EL HEADER SE BAJE */
+}
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0f172a;
+            margin-bottom: 25px;
+        }
+
+        .btn-volver {
+            display: inline-block;
+            margin-bottom: 20px;
+            background: #e9eef7;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            color: #2d3e6f;
+            text-decoration: none;
+            border: 1px solid #cfd9e6;
+            transition: 0.2s;
+        }
+        .btn-volver:hover {
+            background: #d8e3f7;
+        }
+
+        /* Crucigrama */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(8, 45px);
+            gap: 4px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .cell {
+            width: 45px;
+            height: 45px;
+            background: #e5e7eb;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            text-align: center;
+            border: none;
+            outline: none;
+        }
+
+        .cell.filled {
+            background: white;
+            border: 1px solid #cfd3d8;
+        }
+
+        .correct {
+            background: #c8f9d4 !important;
+            border-color: #4ade80 !important;
+        }
+
+        .incorrect {
+            background: #ffd7d7 !important;
+            border-color: #f87171 !important;
+        }
+
+        .btn-check {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 28px;
+            background: #328dfe;
+            color: white;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .btn-check:hover {
+            background: #1c6fde;
+        }
+
+        .preguntas {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 12px;
+        }
+
+        /* TOAST BONITO */
+        .toast {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            background: #ffffff;
+            padding: 15px 22px;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            border-left: 6px solid #328dfe;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: all .35s ease;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .toast.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .toast-icon {
+            font-size: 1.4rem;
+        }
+
+        .toast-error {
+            border-left-color: #ef4444;
+        }
+    </style>
+</head>
+
+<body>
+
+    
+<header>
+    <a href="/">
+        <img src="/images/logo2.png" alt="Logo HenJid">
+        <span>HenJid</span>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/modulos">Módulos</a></li>
+            <li><a href="/progreso">Progreso</a></li>
+
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}"></span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+
+   <a th:href="@{'/curso/' + ${moduloId}}" class="btn-volver">
+        ← Volver al módulo
+   </a>
+
+    <h1>Crucigrama</h1>
+
+    <div class="grid">
+        <input class="cell filled" id="c1">
+        <input class="cell filled" id="c2">
+        <input class="cell filled" id="c3">
+        <div></div>
+        <input class="cell filled" id="b1">
+        <input class="cell filled" id="b2">
+        <input class="cell filled" id="b3">
+        <input class="cell filled" id="b4">
+
+        <input class="cell filled" id="c4">
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
+        <input class="cell filled" id="d1">
+        <input class="cell filled" id="d2">
+        <input class="cell filled" id="d3">
+        <div></div><div></div><div></div><div></div><div></div>
+
+        <div></div><div></div>
+        <input class="cell filled" id="s1">
+        <input class="cell filled" id="s2">
+        <input class="cell filled" id="s3">
+        <div></div><div></div><div></div>
+    </div>
+
+    <button class="btn-check" onclick="verificar()">Comprobar</button>
+
+    <div class="preguntas">
+        <p><strong>Horizontales:</strong></p>
+        <p>1. Animal que dice “meow”. (3 letras)</p>
+        <p>2. Objeto para leer. (4 letras)</p>
+
+        <p><strong>Verticales:</strong></p>
+        <p>3. Animal que dice “woof”. (3 letras)</p>
+        <p>4. Lo contrario de luna. (3 letras)</p>
+    </div>
+
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast">
+    <span id="toastIcon" class="toast-icon"></span>
+    <span id="toastMsg"></span>
+</div>
+
+<script>
+function showToast(message, success = true) {
+    const toast = document.getElementById("toast");
+    const icon = document.getElementById("toastIcon");
+    const msg = document.getElementById("toastMsg");
+
+    msg.textContent = message;
+
+    if (success) {
+        icon.textContent = "🎉";
+        toast.classList.remove("toast-error");
+    } else {
+        icon.textContent = "⚠️";
+        toast.classList.add("toast-error");
+    }
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2800);
+}
+
+function verificar() {
+    const respuestas = {
+        c1: "C", c2: "A", c3: "T",
+        b1: "B", b2: "O", b3: "O", b4: "K",
+        d1: "D", d2: "O", d3: "G",
+        s1: "S", s2: "U", s3: "N"
+    };
+
+    let correcto = true;
+
+    for (let id in respuestas) {
+        let input = document.getElementById(id);
+        let val = input.value.toUpperCase();
+
+        if (val === respuestas[id]) {
+            input.classList.add("correct");
+            input.classList.remove("incorrect");
+        } else {
+            input.classList.add("incorrect");
+            input.classList.remove("correct");
+            correcto = false;
+        }
+    }
+
+    if (correcto) {
+        showToast("¡Excelente! Completaste el crucigrama 🎉", true);
+    } else {
+        showToast("Algunas respuestas son incorrectas ❌", false);
+    }
+}
+</script>
+
+</body>
+</html>

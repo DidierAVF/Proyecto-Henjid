@@ -1,0 +1,225 @@
+/* ===========================================================
+   Curso — Estilos individuales del módulo seleccionado
+=========================================================== */
+
+/* CONTENEDOR GENERAL */
+.curso-container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 30px auto;
+    padding: 0 16px;
+}
+
+/* =============================================== */
+/*       PANEL EXTERIOR DEL CURSO (GRAN CUADRO)    */
+/* =============================================== */
+
+.curso-panel {
+    background: #ffffff;
+    border-radius: 26px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    padding: 2.5rem 3rem;
+    margin-top: 1.5rem;  /* Reduce distancia desde el header */
+}
+
+/* =============================================== */
+/* HEADER DEL CURSO                                */
+/* =============================================== */
+
+.curso-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px; /* ANTES 40px → ahora más compacto */
+}
+
+.nivel-tag {
+    display: inline-block;
+    padding: 6px 18px;
+    background: #1d72f2;
+    color: white;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.curso-info h1 {
+    font-size: 2rem;
+    margin: 4px 0 6px;
+
+}
+
+.curso-info p {
+    margin: 0;
+    color: #6b7280;
+}
+
+/* Caja del historial */
+.curso-historial {
+    background: #ffffff;
+    padding: 15px 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    min-width: 240px;
+}
+
+/* =============================================== */
+/* LECCIONES                                       */
+/* =============================================== */
+
+.lecciones-section {
+    margin-top: -50px; /* Reducido */
+}
+
+.lecciones-section h2 {
+    margin-bottom: 15px;
+}
+
+.lecciones-grid {
+      display: grid;
+    grid-template-columns: repeat(2, 260px); /* columnas exactas */
+    gap: 18px 26px; /* antes 28px 35px */
+    
+}
+
+/* Tarjetas */
+.leccion-card {
+    width: 260px;
+    height: 230px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.08);
+    padding: 25px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform .15s ease;
+}
+
+.leccion-card:hover {
+    transform: translateY(-4px);
+}
+
+.leccion-icon img {
+    width: 70px;
+    height: auto;
+}
+
+/* Botones */
+.btn-ingresar {
+    padding: 10px 20px;
+    background: #2e7cf6;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn-ingresar:hover {
+    background: #0b57d0;
+}
+
+.btn-bloqueado {
+    padding: 10px 20px;
+    background: #d1d5db;
+    color: #6b7280;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: not-allowed;
+}
+
+/* Quiz card */
+.quiz-card {
+    width: 260px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =============================================== */
+/* RESPONSIVE                                       */
+/* =============================================== */
+
+@media (max-width: 850px) {
+    .curso-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .lecciones-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+
+/* Botón volver a módulos */
+.btn-atras-curso {
+    display: inline-block;
+    margin-bottom: 20px;
+    background: #e9eef7;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #2d3e6f;
+    text-decoration: none;
+    border: 1px solid #cfd9e6;
+    transition: 0.2s;
+}
+
+.btn-atras-curso:hover {
+    background: #d8e3f7;
+}
+
+
+.curso-actividades {
+    background: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    margin-top: 20px;
+}
+
+.curso-actividades h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.actividades-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.actividad-card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.actividad-card img {
+    width: 50px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.actividad-card h4 {
+    margin-bottom: 10px;
+}
+
+.btn-jugar {
+    display: inline-block;
+    background: #2e7cf6;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.btn-jugar:hover {
+    background: #1f63d1;
+}

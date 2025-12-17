@@ -1,0 +1,620 @@
+/************************************************************
+ * HenJid style.css de index.html
+ ************************************************************/
+
+/* ========== Reset básico y variables ========== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+:root{
+  /* Paleta */
+  --bg:#f5f6f7;
+  --surface:#ffffff;
+  --text:#0f172a;
+  --muted:#6b7280;
+  --brand:#2e7cf6;
+  --brand-2:#39b36d;
+  --line:#e5e7eb;
+  --shadow:0 8px 20px rgba(0,0,0,.08);
+  --radius:14px;
+
+  /* Tipos y tamaños */
+  --font:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;
+  --h1:clamp(2.2rem,4.5vw,3.2rem);
+  --h2:clamp(1.4rem,2.5vw,1.8rem);
+  --h3:1.1rem;
+  --lead:1rem;
+}
+
+/* Fondo general y tipografía */
+html, body {
+    height: 100%;
+    background: var(--bg);
+}
+
+/* ⬇️ Sticky layout: header arriba, footer al suelo */
+body{
+  margin:0;
+  color:var(--text);
+  font-family:var(--font);
+  line-height:1.5;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* main se estira para empujar el footer hacia abajo */
+main{
+  flex:1;
+}
+
+/* Elementos base */
+img{ max-width:100%; display:block; }
+ul,ol{ margin:0; padding:0; }
+ul[role], ul:not([role]){ list-style:none; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; }
+
+/* Contenedores CENTRADOS para header y main */
+body>header,
+body>main{
+  width:100%;
+  max-width:1140px;
+  margin-inline:auto;
+  padding-inline:16px;
+}
+
+/* Footer también centrado pero pegado al suelo gracias al flex del body */
+body>footer{
+  width:100%;
+  max-width:1140px;
+  margin-inline:auto;
+  padding-inline:16px;
+}
+
+/* ========== navegación ========== */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-block:18px;
+  gap:16px;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  border-bottom-left-radius:var(--radius);
+  border-bottom-right-radius:var(--radius);
+}
+
+/* Marca logo y texto */
+header>a{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size:1.25rem;
+}
+
+/* Nav */
+header nav ul{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+header nav a{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 10px;
+  border-radius:10px;
+}
+header nav a:hover{ background:#eef2ff; }
+
+/* Tamaño del logo */
+header > a > img{
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+/* ========== Main ========== */
+/* columnas (solo para la home) */
+.home-main>section:first-of-type{
+  display:grid;
+  grid-template-columns: 1fr 1fr 0.85fr;
+  grid-template-areas:
+    "title    title    image"
+    "subtitle subtitle image"
+    "cta1     cta2     image";
+  align-items:center;
+  column-gap:28px;
+  row-gap:10px;
+  padding-block:28px 18px;
+}
+
+/* Título */
+.home-main>section:first-of-type h1{
+  grid-area:title;
+  font-size:var(--h1);
+  line-height:1.15;
+  margin:0 0 8px 0;
+}
+
+/* Subtítulo*/
+.home-main>section:first-of-type p{
+  grid-area:subtitle;
+  margin:0 0 8px 0;
+  color:var(--muted);
+  font-size:var(--lead);
+  font-style:italic;
+}
+
+/* Botón Registrarse */
+.home-main>section:first-of-type > a:first-of-type{
+  grid-area:cta1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 16px;
+  font-size:1.05rem;
+  border-radius:12px;
+  background:var(--brand);
+  color:#fff;
+  font-weight:700;
+  box-shadow:var(--shadow);
+}
+
+/* Botón Explorar módulos*/
+.home-main>section:first-of-type > a:nth-of-type(2){
+  grid-area:cta2;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 16px;
+  font-size:1.05rem;
+  border-radius:12px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+
+/* Imagen Chicos Ingles */
+.home-main>section:first-of-type > img{
+  grid-area:image;
+  border-radius:10px;
+  justify-self:end;
+  max-width: 350px;
+  height: auto;
+}
+
+/* Sección 2 (home) */
+.home-main>section:nth-of-type(2){
+  background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+  margin-block:10px 22px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+/* Título*/
+.home-main>section:nth-of-type(2)>h2{
+  grid-column:1 / -1;
+  font-size:var(--h2);
+  margin:0 0 14px 0;
+}
+.home-main>section:nth-of-type(2) article{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:14px;
+}
+.home-main>section:nth-of-type(2) article h3{
+  font-size:var(--h3);
+  margin:8px 0 6px 0;
+}
+.home-main>section:nth-of-type(2) article p{
+  color:var(--muted);
+  margin:0;
+}
+
+/* Creadores*/
+
+/* Título*/
+main>section:nth-of-type(3)>h2{
+  grid-column:1 / -1;
+}
+
+
+
+/* ========== FOOTER ========== */
+footer{
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  border-top-left-radius:var(--radius);
+  border-top-right-radius:var(--radius);
+  padding-block:16px 24px;
+}
+footer>p{ margin:0 0 8px 0; font-weight:600; }
+footer nav ul{ display:flex; gap:12px; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width:960px){
+  /* Hero a una columna en orden natural */
+  .home-main>section:first-of-type{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "title"
+      "subtitle"
+      "cta1"
+      "cta2"
+      "image";
+  }
+  .home-main>section:first-of-type > img{
+    justify-self:center;
+    max-width:420px;
+  }
+
+  .home-main>section:nth-of-type(2),
+  .home-main>section:nth-of-type(3){
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media (max-width:640px){
+  header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  header nav ul{ gap:10px; flex-wrap:wrap; }
+
+  .home-main>section:nth-of-type(2),
+  .home-main>section:nth-of-type(3){
+    grid-template-columns:1fr;
+  }
+
+  .home-main>section:first-of-type > a{
+    display:block;
+    width:max(220px,60%);
+    text-align:center;
+  }
+}
+
+/* ---------- USER MENU (avatar + dropdown) ---------- */
+
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-menu > button {
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.user-menu > button:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Circulito del avatar */
+.user-menu .avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1d4ed8; /* azul suave */
+}
+
+/* Dropdown */
+.user-menu-dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  min-width: 150px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+  padding: 8px 0;
+  display: none;
+  z-index: 50;
+}
+
+.user-menu-dropdown a {
+  display: block;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #111827;
+}
+
+.user-menu-dropdown a:hover {
+  background-color: #f3f4f6;
+}
+
+/* Clase que muestra el menú */
+.user-menu-dropdown.show {
+  display: block;
+}
+
+/* --- Estilo especial para "Cerrar sesión" --- */
+.logout-option {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 16px !important;
+  color: #111827 !important;
+  font-weight: 400 !important;
+  text-decoration: none !important;
+}
+
+.logout-option:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+}
+
+/* Ícono de puerta oculto inicialmente */
+.logout-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: 0.2s ease;
+}
+
+/* Mostrar icono en hover */
+.logout-option:hover .logout-icon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.user-menu-dropdown a.logout-option:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #b91c1c !important;
+}
+
+/* Ícono de puerta (oculto por defecto) */
+.logout-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: 0.2s ease;
+}
+
+/* Asegura que texto y icono estén alineados SIEMPRE */
+.logout-text {
+  display: inline-block;
+}
+
+/* --- Toast Blanco Premium (ESTILO HENJID) --- */
+.toast-logout {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: #ffffff;
+  color: #0f172a;
+  padding: 14px 22px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast-logout.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Ícono con su color original */
+.toast-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* Avatares en otros sitios (perfil, etc.) */
+
+
+.avatar-foto {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e6ecff;
+}
+
+
+/* Botones de la home */
+.btn-home {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background-color .2s ease, color .2s ease;
+    margin-right: 12px;
+}
+
+/* Botón azul */
+.btn-blue {
+    background-color: #328DFE;
+    color: white;
+}
+.btn-blue:hover {
+    background-color: #1c6fde; /* un poco más oscuro */
+}
+
+/* Botón blanco */
+.btn-white {
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #dce1e7;
+}
+.btn-white:hover {
+    background-color: #f1f1f1; /* leve oscurecimiento */
+}
+/* Botón blanco */
+.btn-white {
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #dce1e7;
+}
+.btn-white:hover {
+    background-color: #f1f1f1; /* leve oscurecimiento */
+}
+
+/* Fuerza el hover de los botones de la home */
+.home-main > section:first-of-type .btn-blue:hover {
+    background-color: #1c6fde !important;
+}
+
+.home-main > section:first-of-type .btn-white:hover {
+    background-color: #f1f1f1 !important;
+    color: #111 !important;
+}
+
+/* Subrayado azul del link activo en la navbar */
+.menu a[aria-current="page"] {
+    color: var(--brand);
+    font-weight: 600;
+    position: relative;
+}
+
+.menu a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 3px;
+    background: var(--brand);
+    border-radius: 2px;
+}
+
+* Avatar */
+.avatar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:#e5f0ff;
+  overflow:hidden;
+  font-weight:600;
+  font-size:0.9rem;
+  color:#1d4ed8;
+}
+.avatar-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:inherit;
+}
+
+.creadores-section {
+    margin-top: 40px;
+  margin-bottom: 60px; 
+}
+
+.creadores-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.creador-card {
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.creador-card blockquote {
+  margin: 0 0 12px 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.creador-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.creador-foto {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.creador-nombre {
+  margin: 0;
+  font-weight: 700;
+}
+
+.creador-rol {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+
+.caracteristicas-section {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px;
+    margin-block: 10px 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.caracteristica-card {
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+}
+
+.caracteristica-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HenJid — Aprende inglés gratis</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <a href="/">
+      <img src="images/logo2.png" alt="Logo HenJid">
+      <span>HenJid</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <ul class="menu">
+
+              <li><a href="/" aria-current="page">Inicio</a></li>
+<li><a href="/modulos">Módulos</a></li>
+<li><a href="/progreso">Progreso</a></li>
+
+
+       <!-- Si NO hay sesión -->
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <!-- Si SÍ hay sesión -->
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             alt="Avatar"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}">
+                            U
+                        </span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon" alt="">
+                    </a>
+                </div>
+            </li>
+      </ul>
+    </nav>
+</header>
+
+
+
+<main class="home-main">
+
+  <!-- Sección de bienvenida -->
+  <section>
+    <h1>Comienza a aprender inglés gratis</h1>
+    <p>Aprende a tu ritmo, desde cualquier lugar</p>
+
+    <a href="/registro" class="btn-home btn-blue">Registrarse</a>
+<a href="/modulos" class="btn-home btn-white">Explorar módulos</a>
+
+
+    <img src="images/chicos2.png" alt="Dos estudiantes practicando inglés">
+  </section>
+
+
+<section class="caracteristicas-section">
+    <h2>Características principales</h2>
+
+    <article class="caracteristica-card">
+        <img src="/images/icons/modulos.png" alt="Módulos" class="caracteristica-icon">
+        <h3>Aprendizaje por módulos</h3>
+        <p>Contenido organizado por niveles para avanzar paso a paso.</p>
+    </article>
+
+    <article class="caracteristica-card">
+        <img src="/images/icons/quiz.png" alt="Progreso" class="caracteristica-icon">
+        <h3>Quizzes y progreso</h3>
+        <p>Evalúate y guarda tu progreso automáticamente.</p>
+    </article>
+
+    <article class="caracteristica-card">
+        <img src="/images/icons/actividad.png" alt="Actividades" class="caracteristica-icon">
+        <h3>Anuncios con actividades</h3>
+        <p>Retos y actividades interactivas para reforzar el aprendizaje.</p>
+    </article>
+</section>
+
+
+  <!-- Sección de testimonios -->
+  <section class="creadores-section">
+    <h2>Creadores de la página</h2>
+
+    <div class="creadores-grid">
+
+        <!-- Johander -->
+        <article class="creador-card">
+            <blockquote>«Los datos cuentan la historia, solo hay que saber consultarlos»</blockquote>
+
+            <div class="creador-info">
+                <img src="/images/team/johander.jpg" alt="Johander" class="creador-foto">
+                <div>
+                    <p class="creador-nombre">Johander</p>
+                    <p class="creador-rol">Experto en Bases de Datos & PostgreSQL</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Didier -->
+        <article class="creador-card">
+            <blockquote>«Construir es fácil, mantener vivo un proyecto es el verdadero reto»</blockquote>
+
+            <div class="creador-info">
+                <img src="/images/team/didier.jpg" alt="Didier" class="creador-foto">
+                <div>
+                    <p class="creador-nombre">Didier</p>
+                    <p class="creador-rol">Programador Web (JavaScript, Spring Boot)</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Helen -->
+        <article class="creador-card">
+            <blockquote>«El aprendizaje también entra por los ojos»</blockquote>
+
+            <div class="creador-info">
+                <img src="/images/team/helen.jpg" alt="Helen" class="creador-foto">
+                <div>
+                    <p class="creador-nombre">Helen</p>
+                    <p class="creador-rol">Diseñadora del Curso de Inglés, Manejo de CSS</p>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+
+</main>
+
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <p>HenJid</p>
+  <nav>
+    <ul>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">YouTube</a></li>
+      <li><a href="#">Instagram</a></li>
+    </ul>
+  </nav>
+</footer>
+
+<script src="/js/main.js"></script>
+
+<!-- TOAST LOGOUT -->
+<div id="toastLogout" class="toast-logout">
+  <div class="toast-content">
+    <img src="/images/puerta.png" class="toast-icon">
+    <span>Cierre de sesión exitoso</span>
+  </div>
+</div>
+
+</body>
+</html>

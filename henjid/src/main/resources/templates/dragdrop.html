@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrastra y Suelta — HenJid</title>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/modulos.css">
+      <link rel="stylesheet" href="/css/leccion.css">
+ 
+
+    <style>
+      body {
+    background: #f5f6f7;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0; /* 🔥 EVITA QUE EL HEADER SE BAJE */
+}
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0f172a;
+            margin-bottom: 25px;
+        }
+
+        /* Botón volver */
+        .btn-volver {
+            display: inline-block;
+            margin-bottom: 20px;
+            background: #e9eef7;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            color: #2d3e6f;
+            text-decoration: none;
+            border: 1px solid #cfd9e6;
+            transition: 0.2s;
+        }
+        .btn-volver:hover {
+            background: #d8e3f7;
+        }
+
+        /* Drag & Drop */
+        .word-list, .drop-zone {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .word {
+            padding: 10px 18px;
+            background: #328dfe;
+            color: white;
+            border-radius: 10px;
+            cursor: grab;
+            font-weight: 600;
+        }
+
+        .slot {
+            width: 130px;
+            height: 50px;
+            border: 2px dashed #aab7c4;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 50px;
+            background: #f1f5f9;
+        }
+
+        .correct {
+            background: #c8f9d4 !important;
+            border-color: #4ade80 !important;
+        }
+
+        .incorrect {
+            background: #ffd7d7 !important;
+            border-color: #f87171 !important;
+        }
+
+        .btn-check {
+            display: block;
+            margin: 25px auto;
+            padding: 12px 28px;
+            background: #328dfe;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: .2s;
+        }
+        .btn-check:hover {
+            background: #1c6fde;
+        }
+
+        /* TOAST BONITO */
+        .toast {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            background: #ffffff;
+            padding: 15px 22px;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            border-left: 6px solid #328dfe;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: all .35s ease;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .toast.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .toast-icon {
+            font-size: 1.4rem;
+        }
+
+        .toast-error {
+            border-left-color: #ef4444;
+        }
+    </style>
+</head>
+
+<body>
+
+ 
+<header>
+    <a href="/">
+        <img src="/images/logo2.png" alt="Logo HenJid">
+        <span>HenJid</span>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/modulos">Módulos</a></li>
+            <li><a href="/progreso">Progreso</a></li>
+
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}"></span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>   
+
+<div class="container">
+
+    <a th:href="@{'/curso/' + ${moduloId}}" class="btn-volver">← Volver al módulo</a>
+
+    <h1>Arrastra y Suelta</h1>
+
+    <p style="text-align:center;">Relaciona cada palabra con su imagen.</p>
+
+    <div class="word-list">
+        <div class="word" draggable="true" data-word="CAT">Cat</div>
+        <div class="word" draggable="true" data-word="DOG">Dog</div>
+        <div class="word" draggable="true" data-word="SUN">Sun</div>
+    </div>
+
+    <div class="drop-zone">
+        <div class="slot" data-answer="CAT">🐱</div>
+        <div class="slot" data-answer="DOG">🐶</div>
+        <div class="slot" data-answer="SUN">☀️</div>
+    </div>
+
+    <button class="btn-check" onclick="verificar()">Comprobar</button>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast">
+    <span id="toastIcon" class="toast-icon"></span>
+    <span id="toastMsg"></span>
+</div>
+
+<script>
+function showToast(message, success = true) {
+    const toast = document.getElementById("toast");
+    const icon = document.getElementById("toastIcon");
+    const msg = document.getElementById("toastMsg");
+
+    msg.textContent = message;
+
+    if (success) {
+        icon.textContent = "🎉";
+        toast.classList.remove("toast-error");
+    } else {
+        icon.textContent = "⚠️";
+        toast.classList.add("toast-error");
+    }
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2800);
+}
+
+/* DRAG START */
+document.querySelectorAll(".word").forEach(w => {
+    w.addEventListener("dragstart", e => {
+        e.dataTransfer.setData("text", e.target.dataset.word);
+    });
+});
+
+/* DROP */
+document.querySelectorAll(".slot").forEach(slot => {
+    slot.addEventListener("dragover", e => e.preventDefault());
+    slot.addEventListener("drop", e => {
+        e.preventDefault();
+        let word = e.dataTransfer.getData("text");
+        slot.textContent = word;
+        slot.dataset.selected = word;
+    });
+});
+
+/* VERIFICAR */
+function verificar() {
+
+    document.querySelectorAll(".slot").forEach(slot => {
+        if (slot.dataset.selected === slot.dataset.answer) {
+            slot.classList.add("correct");
+            slot.classList.remove("incorrect");
+        } else {
+            slot.classList.add("incorrect");
+            slot.classList.remove("correct");
+        }
+    });
+
+    let correctas = [...document.querySelectorAll('.slot')].every(
+        s => s.dataset.selected === s.dataset.answer
+    );
+
+    if (correctas) {
+        showToast("¡Excelente! Todas las respuestas son correctas.", true);
+    } else {
+        showToast("Algunas respuestas están incorrectas.", false);
+    }
+}
+</script>
+
+</body>
+</html>

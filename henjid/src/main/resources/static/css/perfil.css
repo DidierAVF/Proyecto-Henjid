@@ -1,0 +1,103 @@
+/* === Tarjeta del perfil === */
+.perfil-container {
+    max-width: 650px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 26px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* Encabezado (foto/avatar) */
+.perfil-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Foto */
+.perfil-foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    display: block;
+    margin: 0 auto;
+}
+
+/* Avatar inicial */
+.perfil-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #e5f0ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1d4ed8;
+    margin: 0 auto;
+}
+
+.perfil-info {
+    text-align: center;
+}
+
+.perfil-info h2 {
+    font-size: 1.7rem;
+    margin: 10px 0;
+}
+
+.perfil-username {
+    color: #475569;
+    font-size: 1rem;
+}
+
+.perfil-pais {
+    color: #64748b;
+    margin-top: 4px;
+}
+
+/* Caja gris para info extra */
+.perfil-data {
+    margin-top: 22px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 12px;
+}
+.perfil-data p {
+    margin: 6px 0;
+    color: #334155;
+}
+
+/* === Botones === */
+.perfil-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-accion {
+    padding: 10px 16px;
+    background: #2e7cf6;
+    color: #fff;
+    border-radius: 10px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.btn-accion:hover {
+    background: #1c5ed1;
+}
+
+.btn-logout {
+    padding: 10px 16px;
+    background: #ef4444;
+    color: white;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.btn-logout:hover {
+    background: #dc2626;
+}

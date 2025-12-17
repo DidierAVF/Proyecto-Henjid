@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos — HenJid</title>
+
+    <!-- Estilos generales del sitio -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Estilos específicos de la página de módulos -->
+    <link rel="stylesheet" href="/css/modulos.css">
+</head>
+
+<body>
+
+<header>
+    <a href="/">
+        <img src="/images/logo2.png" alt="Logo HenJid">
+        <span>HenJid</span>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/modulos" aria-current="page">Módulos</a></li>
+            <li><a href="/progreso">Progreso</a></li>
+
+            <!-- Si NO hay sesión -->
+            <li th:if="${session.username == null}">
+                <a href="/login">Perfil</a>
+            </li>
+
+            <!-- Si SÍ hay sesión -->
+            <li class="user-menu" th:if="${session.username != null}">
+                <button id="userMenuBtn">
+                    <!-- Avatar: foto si hay, inicial si no -->
+                    <div class="avatar">
+                        <img th:if="${session.foto != null}"
+                             th:src="@{'/uploads/' + ${session.foto}}"
+                             alt="Avatar"
+                             class="avatar-img">
+
+                        <span th:if="${session.foto == null}"
+                              th:text="${#strings.substring(session.username,0,1).toUpperCase()}">
+                            U
+                        </span>
+                    </div>
+
+                    <span th:text="${session.username}">Usuario</span>
+                </button>
+
+                <div class="user-menu-dropdown" id="userMenuDropdown">
+                    <a href="/perfil">Ver perfil</a>
+                    <a href="/configuracion">Configuración</a>
+
+                    <a href="/logout" id="logoutBtn" class="logout-option">
+                        <span class="logout-text">Cerrar sesión</span>
+                        <img src="/images/puerta.png" class="logout-icon" alt="Salir">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="home-main">
+
+    <section class="modules-section">
+
+        <header class="modules-header">
+            <h1>Módulos</h1>
+            <p>Elige tu nivel y avanza paso a paso en tu aprendizaje de inglés.</p>
+        </header>
+
+        <div class="modules" th:if="${modulos != null}">
+
+            <!-- Tarjeta de módulo -->
+            <article th:each="m : ${modulos}"
+                th:classappend="${bloqueado[m.id]} ? 'modulo-bloqueado' : ''"
+                >
+                <!-- Badge de nivel -->
+                <div class="badge" th:style="'background-color:' + ${m.color}">
+                    <span th:text="${m.nivel}">A1</span>
+                </div>
+
+                <!-- Info del módulo -->
+                <div class="info">
+                    <h3 th:text="${m.nombre}">A1 - Principiante</h3>
+                    <p th:text="${m.descripcion}">
+                        Fundamentos básicos del inglés.
+                    </p>
+                </div>
+
+                <!-- Botón de acción -->
+                <!-- Si el módulo está desbloqueado -->
+<a class="cta"
+   th:if="${!bloqueado[m.id]}"
+   th:href="@{'/curso/' + ${m.id}}">
+    Ingresar
+</a>
+
+<!-- Si el módulo está bloqueado -->
+<div class="cta"
+     th:if="${bloqueado[m.id]}"
+     style="background:#b8b8b8; cursor:not-allowed; opacity:0.7;">
+     Bloqueado
+</div>
+
+            </article>
+
+        </div>
+
+        <!-- Si por alguna razón no hay módulos -->
+        <p class="modules-empty" th:if="${modulos == null || #lists.isEmpty(modulos)}">
+            Aún no hay módulos disponibles.
+        </p>
+
+    </section>
+</main>
+
+<footer>
+    <p>HenJid</p>
+    <nav>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </nav>
+</footer>
+
+<script src="/js/main.js"></script>
+
+<!-- Toast logout -->
+<div id="toastLogout" class="toast-logout">
+    <div class="toast-content">
+        <img src="/images/puerta.png" class="toast-icon" alt="">
+        <span>Cierre de sesión exitoso</span>
+    </div>
+</div>
+
+</body>
+</html>
